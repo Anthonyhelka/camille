@@ -29,10 +29,10 @@ export default () => {
     );
 };
 ```
+
 # Components
 
-* Avatar
-* Button
+* [Avatar](#avatar)
 
 # Avatar
 ####  Props

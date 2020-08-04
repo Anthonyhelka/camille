@@ -35,6 +35,9 @@ export default () => {
 * [Avatar](#avatar)
 
 # Avatar
+
+An avatar is an image or profile graphic that usually appears next to a user's name.
+
 ####  Props
 | Name   	| Default 	| Type   	| Description                                                                                                 	|
 |--------	|---------	|--------	|-------------------------------------------------------------------------------------------------------------	|

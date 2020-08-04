@@ -19,7 +19,7 @@ In this example, we use the Button component in order to easily render a simple,
 import React from 'react';
 import { Button } from 'camille';
 
-export default () => {
+export default ({ handleClick }) => {
     return (
         <div>
             <Button type="primary" color="green" onClick={handleClick}>
@@ -38,7 +38,7 @@ export default () => {
 
 An avatar is an image or profile graphic that usually appears next to a user's name.
 
-####  Props
+### Props
 | Name   	| Default 	| Type   	| Description                                                                                                 	|
 |--------	|---------	|--------	|-------------------------------------------------------------------------------------------------------------	|
 | src    	|         	| string 	| The source image.                                                                                           	|

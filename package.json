@@ -9,6 +9,13 @@
   },
   "author": "Anthony Helka",
   "license": "MIT",
+  "repository": "anthonyhelka/camille",
+  "keywords": [
+    "camille",
+    "anthonyhelka",
+    "react",
+    "component library"
+  ],
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

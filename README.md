@@ -22,7 +22,7 @@ import { Button } from 'camille';
 export default ({ handleClick }) => {
     return (
         <div>
-            <Button size="massive" color="green" onClick={handleClick}>
+            <Button size="large" color="green" onClick={handleClick}>
               Checkout
             </Button>
         </div>
@@ -45,17 +45,17 @@ A Button is a UI element that provides the user a way to trigger an event.
 | size     	| normal  	| string 	| Determines the width, height and font size of the button.<br><br>**Enums**<br>`mini` `small` `normal` `large` `massive`                                                            	|
 | disabled 	| false   	| bool   	| Fades the button and makes it uninteractable.                                                                                                                                      	|
 | compact  	| false   	| bool   	| Greatly reduces padding of the button.                                                                                                                                             	|
-| color    	| default 	| string 	| Determines the background color of the button.<br><br>**Enums**<br>`default` `red` `orange` `yellow` `olive` `green` `teal` `blue` `violet` `purple` `pink` `brown` `grey` `black` 	|
+| color    	| default 	| enum  	| Determines the color of the button.<br><br>**Enums**<br>`default` `red` `orange` `yellow` `olive` `green` `teal` `blue` `violet` `purple` `pink` `brown` `grey` `black` 	|
 | inverted 	| false   	| bool   	| Swaps the background and font color.                                                                                                                                               	|
 
 # Avatar
 
-An avatar is an image or profile graphic that usually appears next to a user's name.
+An avatar is an image or profile graphic that typically appears next to a user's name.
 
 ### Props
 | Name   	| Default 	| Type   	| Description                                                                                                 	|
 |--------	|---------	|--------	|-------------------------------------------------------------------------------------------------------------	|
-| src    	|         	| string 	| The source image.                                                                                           	|
-| size   	| 40px    	| string 	| The size determines the width and height of the image.                                                      	|
-| radius 	| 100px   	| string 	| The radius determines how rounded the corners of the image are.                                             	|
-| status 	| offline 	| enum   	| The status determines the icon next to the Avatar image.<br><br>Status can have a value of online, offline or away.<br><br>**Enums**<br>`online` `offline` `away`  	|
+| src    	|         	| string 	| Source image.                                                                                           	|
+| size   	| 40px    	| string 	| Determines the width and height of the image.                                                      	|
+| radius 	| 100px   	| string 	| Determines how rounded the corners of the avatar are.                                             	|
+| status 	| offline 	| enum   	| Determines the icon next to the Avatar image.<br><br>Status can have a value of online, offline or away.<br><br>**Enums**<br>`online` `offline` `away`  	|

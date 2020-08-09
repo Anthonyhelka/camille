@@ -1,6 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const determineSize = (styles, size) => {
+    switch (size) {
+        case 'mini': 
+            styles.fontSize = '9px';
+            styles.padding = '7px 14px';
+            break;
+        case 'small': 
+            styles.fontSize = '11px';
+            styles.padding = '9px 18px';
+            break;
+        case 'large': 
+            styles.fontSize = '15px';
+            styles.padding = '13px 26px';
+            break;
+        case 'massive': 
+            styles.fontSize = '17px';
+            styles.padding = '15px 30px';
+            break;
+        case 'normal':
+        default:
+            styles.fontSize = '13px';
+            styles.padding = '11px 22px';
+            break;            
+    }
+};
+
 const determineColor = (styles, color) => {
     switch (color) {
         case 'red': styles.backgroundColor = '#DB2828'; break;
@@ -16,23 +42,28 @@ const determineColor = (styles, color) => {
         case 'brown': styles.backgroundColor = '#A5673F'; break;
         case 'grey': styles.backgroundColor = '#767676'; break;
         case 'black': styles.backgroundColor = '#1b1C1D'; break;
+        case 'default':
         default:
+            styles.backgroundColor = 'E0E1E2';
             styles.color = '#595959';
-            styles.backgroundColor = '#E0E1E2';
             break;
     }
 };
 
-export const Button = ({ width, height, disabled, compact, color, children, ...rest }) => {
+const determineCompact = (styles) => {
+    const arr = styles.padding.split(' ').map((item) => item.replace(/\D/g,'') / 2);
+    let newPadding = '';
+    arr.forEach((item) => newPadding += `${item}px `);
+    styles.padding = newPadding;
+};
+
+export const Button = ({ type, size, disabled, compact, color, children, ...rest }) => {
     const styles = {
-        width,
-        height,
         color: '#FFFFFF',
         backgroundColor: '#E0E1E2',//'#2185D0',
         cursor: disabled ? 'default' : 'pointer',
         outline: '0',
         fontFamily: 'Helvetica Neue',
-        padding: compact ? '5px 11px 5px 11px' : '10px 22px 10px 22px',
         fontWeight: '700',
         lineHeight: '14px',
         border: 'none',
@@ -40,7 +71,11 @@ export const Button = ({ width, height, disabled, compact, color, children, ...r
         opacity: disabled ? '.45' : '1',
         margin: '5px 5px 5px 5px'
     };
+
+    determineSize(styles, size);
     determineColor(styles, color);
+    if (compact) determineCompact(styles);
+
     return (
         <button
             style={styles}
@@ -52,22 +87,16 @@ export const Button = ({ width, height, disabled, compact, color, children, ...r
 
 Button.defaultProps = {
     type: 'default',
-    width: 'auto',
-    height: 'auto',
-    active: false,
+    size: 'normal',
     disabled: false,
     compact: false,
-    circular: false,
     color: 'default'
 };
 
 Button.propTypes = {
     type: PropTypes.oneOf(['default', 'basic', 'inverted', 'text']),
-    width: PropTypes.string,
-    height: PropTypes.string,
-    active: PropTypes.bool,
+    size: PropTypes.oneOf(['mini', 'small', 'normal', 'large', 'massive']),
     disabled: PropTypes.bool,
     compact: PropTypes.bool,
-    circular: PropTypes.bool,
     color: PropTypes.oneOf(['default', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black'])
 };

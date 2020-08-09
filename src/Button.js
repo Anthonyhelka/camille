@@ -44,23 +44,30 @@ const determineColor = (styles, color) => {
         case 'black': styles.backgroundColor = '#1b1C1D'; break;
         case 'default':
         default:
-            styles.backgroundColor = 'E0E1E2';
+            styles.backgroundColor = '#E0E1E2';
             styles.color = '#595959';
             break;
     }
 };
 
 const determineCompact = (styles) => {
-    const arr = styles.padding.split(' ').map((item) => item.replace(/\D/g,'') / 2);
     let newPadding = '';
-    arr.forEach((item) => newPadding += `${item}px `);
+    styles.padding.split(' ').forEach((item) => newPadding += `${item.replace(/\D/g,'') / 2}px `);
     styles.padding = newPadding;
 };
 
-export const Button = ({ type, size, disabled, compact, color, children, ...rest }) => {
+const determineInverted = (styles) => {
+    const backgroundColor = styles.backgroundColor;
+    const color = styles.color;
+    styles.backgroundColor = color;
+    styles.color = backgroundColor;
+    styles.border = `2px solid ${backgroundColor}`
+};
+
+export const Button = ({ type, size, disabled, compact, color, inverted, children, ...rest }) => {
     const styles = {
         color: '#FFFFFF',
-        backgroundColor: '#E0E1E2',//'#2185D0',
+        backgroundColor: '#E0E1E2',
         cursor: disabled ? 'default' : 'pointer',
         outline: '0',
         fontFamily: 'Helvetica Neue',
@@ -69,12 +76,12 @@ export const Button = ({ type, size, disabled, compact, color, children, ...rest
         border: 'none',
         borderRadius: '5px',
         opacity: disabled ? '.45' : '1',
-        margin: '5px 5px 5px 5px'
     };
 
     determineSize(styles, size);
     determineColor(styles, color);
     if (compact) determineCompact(styles);
+    if (inverted) determineInverted(styles);
 
     return (
         <button
@@ -90,7 +97,8 @@ Button.defaultProps = {
     size: 'normal',
     disabled: false,
     compact: false,
-    color: 'default'
+    color: 'default',
+    inverted: false
 };
 
 Button.propTypes = {
@@ -98,5 +106,6 @@ Button.propTypes = {
     size: PropTypes.oneOf(['mini', 'small', 'normal', 'large', 'massive']),
     disabled: PropTypes.bool,
     compact: PropTypes.bool,
-    color: PropTypes.oneOf(['default', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black'])
+    color: PropTypes.oneOf(['default', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black']),
+    inverted: PropTypes.bool
 };

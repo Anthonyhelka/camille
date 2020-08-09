@@ -153,21 +153,26 @@ var determineColor = function determineColor(styles, color) {
 
     case 'default':
     default:
-      styles.backgroundColor = 'E0E1E2';
+      styles.backgroundColor = '#E0E1E2';
       styles.color = '#595959';
       break;
   }
 };
 
 var determineCompact = function determineCompact(styles) {
-  var arr = styles.padding.split(' ').map(function (item) {
-    return item.replace(/\D/g, '') / 2;
-  });
   var newPadding = '';
-  arr.forEach(function (item) {
-    return newPadding += "".concat(item, "px ");
+  styles.padding.split(' ').forEach(function (item) {
+    return newPadding += "".concat(item.replace(/\D/g, '') / 2, "px ");
   });
   styles.padding = newPadding;
+};
+
+var determineInverted = function determineInverted(styles) {
+  var backgroundColor = styles.backgroundColor;
+  var color = styles.color;
+  styles.backgroundColor = color;
+  styles.color = backgroundColor;
+  styles.border = "2px solid ".concat(backgroundColor);
 };
 
 var Button = function Button(_ref) {
@@ -176,13 +181,13 @@ var Button = function Button(_ref) {
       disabled = _ref.disabled,
       compact = _ref.compact,
       color = _ref.color,
+      inverted = _ref.inverted,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ["type", "size", "disabled", "compact", "color", "children"]);
+      rest = _objectWithoutProperties(_ref, ["type", "size", "disabled", "compact", "color", "inverted", "children"]);
 
   var styles = {
     color: '#FFFFFF',
     backgroundColor: '#E0E1E2',
-    //'#2185D0',
     cursor: disabled ? 'default' : 'pointer',
     outline: '0',
     fontFamily: 'Helvetica Neue',
@@ -190,12 +195,12 @@ var Button = function Button(_ref) {
     lineHeight: '14px',
     border: 'none',
     borderRadius: '5px',
-    opacity: disabled ? '.45' : '1',
-    margin: '5px 5px 5px 5px'
+    opacity: disabled ? '.45' : '1'
   };
   determineSize(styles, size);
   determineColor(styles, color);
   if (compact) determineCompact(styles);
+  if (inverted) determineInverted(styles);
   return /*#__PURE__*/_react["default"].createElement("button", _extends({
     style: styles,
     disabled: disabled
@@ -208,12 +213,14 @@ Button.defaultProps = {
   size: 'normal',
   disabled: false,
   compact: false,
-  color: 'default'
+  color: 'default',
+  inverted: false
 };
 Button.propTypes = {
   type: _propTypes["default"].oneOf(['default', 'basic', 'inverted', 'text']),
   size: _propTypes["default"].oneOf(['mini', 'small', 'normal', 'large', 'massive']),
   disabled: _propTypes["default"].bool,
   compact: _propTypes["default"].bool,
-  color: _propTypes["default"].oneOf(['default', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black'])
+  color: _propTypes["default"].oneOf(['default', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'grey', 'black']),
+  inverted: _propTypes["default"].bool
 };

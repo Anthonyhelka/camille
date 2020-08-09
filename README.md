@@ -46,6 +46,7 @@ A Button is a UI element that provides the user a way to trigger an event.
 | disabled 	| false   	| bool   	| Fades the button and makes it uninteractable.                                                                                                                                      	|
 | compact  	| false   	| bool   	| Greatly reduces padding of the button.                                                                                                                                             	|
 | color    	| default 	| string 	| Determines the background color of the button.<br><br>**Enums**<br>`default` `red` `orange` `yellow` `olive` `green` `teal` `blue` `violet` `purple` `pink` `brown` `grey` `black` 	|
+| inverted 	| false   	| bool   	| Swaps the background and font color.                                                                                                                                               	|
 
 # Avatar
 

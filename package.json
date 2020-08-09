@@ -1,6 +1,6 @@
 {
   "name": "camille",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Camille is a minimalistic UI library for ReactJS.",
   "main": "index.js",
   "scripts": {

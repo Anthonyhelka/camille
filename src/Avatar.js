@@ -1,9 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Avatar = ({ src, size, radius, status, ...rest }) => {
+export const Avatar = ({ src, size, radius, status, style, ...rest }) => {
+    let styles = {
+        width: size, 
+        height: size, 
+        borderRadius: radius, 
+        objectFit: 'cover'
+    };
+
+    styles = {...styles, ...style};
     return (
-        <img src={src} style={{ width: size, height: size, borderRadius: radius, objectFit: 'cover' }} {...rest} />
+        <img src={src} style={styles} {...rest} />
     );
 };
 

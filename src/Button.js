@@ -5,24 +5,24 @@ const determineSize = (styles, size) => {
     switch (size) {
         case 'mini': 
             styles.fontSize = '9px';
-            styles.padding = '7px 14px';
+            styles.padding = '6px 12px';
             break;
         case 'small': 
             styles.fontSize = '11px';
-            styles.padding = '9px 18px';
+            styles.padding = '8px 16px';
             break;
         case 'large': 
             styles.fontSize = '15px';
-            styles.padding = '13px 26px';
+            styles.padding = '12px 24px';
             break;
         case 'massive': 
             styles.fontSize = '17px';
-            styles.padding = '15px 30px';
+            styles.padding = '13px 26px';
             break;
         case 'normal':
         default:
             styles.fontSize = '13px';
-            styles.padding = '11px 22px';
+            styles.padding = '10px 20px';
             break;            
     }
 };
@@ -64,8 +64,8 @@ const determineInverted = (styles) => {
     styles.border = `2px solid ${backgroundColor}`
 };
 
-export const Button = ({ type, size, disabled, compact, color, inverted, children, ...rest }) => {
-    const styles = {
+export const Button = ({ type, size, disabled, compact, color, inverted, children, style, ...rest }) => {
+    let styles = {
         color: '#FFFFFF',
         backgroundColor: '#E0E1E2',
         cursor: disabled ? 'default' : 'pointer',
@@ -73,15 +73,17 @@ export const Button = ({ type, size, disabled, compact, color, inverted, childre
         fontFamily: 'Helvetica Neue',
         fontWeight: '700',
         lineHeight: '14px',
-        border: 'none',
+        border: '2px solid transparent',
         borderRadius: '5px',
-        opacity: disabled ? '.45' : '1',
+        opacity: disabled ? '.45' : '1'
     };
 
     determineSize(styles, size);
     determineColor(styles, color);
     if (compact) determineCompact(styles);
     if (inverted) determineInverted(styles);
+
+    styles = {...styles, ...style};
 
     return (
         <button

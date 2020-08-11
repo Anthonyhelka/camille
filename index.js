@@ -13,6 +13,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -22,16 +28,19 @@ var Avatar = function Avatar(_ref) {
       size = _ref.size,
       radius = _ref.radius,
       status = _ref.status,
-      rest = _objectWithoutProperties(_ref, ["src", "size", "radius", "status"]);
+      style = _ref.style,
+      rest = _objectWithoutProperties(_ref, ["src", "size", "radius", "status", "style"]);
 
+  var styles = {
+    width: size,
+    height: size,
+    borderRadius: radius,
+    objectFit: 'cover'
+  };
+  styles = _objectSpread(_objectSpread({}, styles), style);
   return /*#__PURE__*/_react["default"].createElement("img", _extends({
     src: src,
-    style: {
-      width: size,
-      height: size,
-      borderRadius: radius,
-      objectFit: 'cover'
-    }
+    style: styles
   }, rest));
 };
 
@@ -63,6 +72,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -71,28 +86,28 @@ var determineSize = function determineSize(styles, size) {
   switch (size) {
     case 'mini':
       styles.fontSize = '9px';
-      styles.padding = '7px 14px';
+      styles.padding = '6px 12px';
       break;
 
     case 'small':
       styles.fontSize = '11px';
-      styles.padding = '9px 18px';
+      styles.padding = '8px 16px';
       break;
 
     case 'large':
       styles.fontSize = '15px';
-      styles.padding = '13px 26px';
+      styles.padding = '12px 24px';
       break;
 
     case 'massive':
       styles.fontSize = '17px';
-      styles.padding = '15px 30px';
+      styles.padding = '13px 26px';
       break;
 
     case 'normal':
     default:
       styles.fontSize = '13px';
-      styles.padding = '11px 22px';
+      styles.padding = '10px 20px';
       break;
   }
 };
@@ -183,7 +198,8 @@ var Button = function Button(_ref) {
       color = _ref.color,
       inverted = _ref.inverted,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ["type", "size", "disabled", "compact", "color", "inverted", "children"]);
+      style = _ref.style,
+      rest = _objectWithoutProperties(_ref, ["type", "size", "disabled", "compact", "color", "inverted", "children", "style"]);
 
   var styles = {
     color: '#FFFFFF',
@@ -193,7 +209,7 @@ var Button = function Button(_ref) {
     fontFamily: 'Helvetica Neue',
     fontWeight: '700',
     lineHeight: '14px',
-    border: 'none',
+    border: '2px solid transparent',
     borderRadius: '5px',
     opacity: disabled ? '.45' : '1'
   };
@@ -201,6 +217,7 @@ var Button = function Button(_ref) {
   determineColor(styles, color);
   if (compact) determineCompact(styles);
   if (inverted) determineInverted(styles);
+  styles = _objectSpread(_objectSpread({}, styles), style);
   return /*#__PURE__*/_react["default"].createElement("button", _extends({
     style: styles,
     disabled: disabled
